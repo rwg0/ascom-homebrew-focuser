@@ -11,8 +11,8 @@ namespace Registrar
     {
         static void Main(string[] args)
         {
-            Process.Start(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/codebase Homebrew.Skywatcher.dll");
-            Process.Start(@"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/codebase Homebrew.Skywatcher.dll");
+            Process.Start(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/codebase ASCOM.Homebrew.Skywatcher.Focuser.dll");
+            Process.Start(@"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/codebase ASCOM.Homebrew.Skywatcher.Focuser.dll");
         }
     }
 }

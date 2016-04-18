@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using ASCOM.Interface;
 using SharpCap.Base;
 
-namespace Sharpcap.FocuserProxy.ASCOM
+namespace TestApp
 {
     internal class FocuserDispatchProxy : IFocuser, IDisposable
     {
@@ -17,14 +17,20 @@ namespace Sharpcap.FocuserProxy.ASCOM
 
         #region IFocuser Members
 
-        public bool Absolute => GetProperty<bool>("Absolute");
+        public bool Absolute
+        {
+            get { return GetProperty<bool>("Absolute"); }
+        }
 
         public void Halt()
         {
             CallMethod("Halt");
         }
 
-        public bool IsMoving => GetProperty<bool>("IsMoving");
+        public bool IsMoving
+        {
+            get { return GetProperty<bool>("IsMoving"); }
+        }
 
         public bool Link
         {
@@ -34,23 +40,35 @@ namespace Sharpcap.FocuserProxy.ASCOM
         }
 
 
-        public int MaxIncrement => GetProperty<int>("MaxIncrement");
+        public int MaxIncrement
+        {
+            get { return GetProperty<int>("MaxIncrement"); }
+        }
 
-        public int MaxStep => GetProperty<int>("MaxStep");
+        public int MaxStep
+        {
+            get { return GetProperty<int>("MaxStep"); }
+        }
 
         public void Move(int val)
         {
             CallMethod("Move", val);
         }
 
-        public int Position => GetProperty<int>("Position");
+        public int Position
+        {
+            get { return GetProperty<int>("Position"); }
+        }
 
         public void SetupDialog()
         {
             CallMethod("SetupDialog");
         }
 
-        public double StepSize => GetProperty<double>("StepSize");
+        public double StepSize
+        {
+            get { return GetProperty<double>("StepSize"); }
+        }
 
         public bool TempComp
         {
@@ -58,9 +76,15 @@ namespace Sharpcap.FocuserProxy.ASCOM
             set { SetProperty("TempComp", value); }
         }
 
-        public bool TempCompAvailable => GetProperty<bool>("TempCompAvailable");
+        public bool TempCompAvailable
+        {
+            get { return GetProperty<bool>("TempCompAvailable"); }
+        }
 
-        public double Temperature => GetProperty<double>("Temperature");
+        public double Temperature
+        {
+            get { return GetProperty<double>("Temperature"); }
+        }
 
         #endregion
 

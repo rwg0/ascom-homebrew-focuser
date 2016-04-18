@@ -1,4 +1,4 @@
-﻿namespace Sharpcap.FocuserProxy.ASCOM
+﻿namespace TestApp
 {
     partial class FocusDualSliderControl
     {

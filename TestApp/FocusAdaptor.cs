@@ -32,11 +32,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Forms;
 using ASCOM.Interface;
 using SharpCap.Base;
 
-namespace Sharpcap.FocuserProxy.ASCOM
+namespace TestApp
 {
     public interface IFocusAdaptor : IDisposable
     {
@@ -93,7 +92,10 @@ namespace Sharpcap.FocuserProxy.ASCOM
 
         public int Maximum { get; private set; }
 
-        public int Current => _iCurrent;
+        public int Current
+        {
+            get { return _iCurrent; }
+        }
 
         public int Move(int target)
         {
@@ -136,7 +138,10 @@ namespace Sharpcap.FocuserProxy.ASCOM
             }
         }
 
-        public bool IsMoving => _isMoving;
+        public bool IsMoving
+        {
+            get { return _isMoving; }
+        }
 
         public void Dispose()
         {
@@ -156,8 +161,8 @@ namespace Sharpcap.FocuserProxy.ASCOM
 
             if (Marshal.IsComObject(_focuser))
                 Marshal.ReleaseComObject(_focuser);
-            else
-                (_focuser as IDisposable)?.Dispose();
+            else if (_focuser is IDisposable)
+                (_focuser as IDisposable).Dispose();
             _focuser = null;
         }
 
@@ -241,7 +246,8 @@ namespace Sharpcap.FocuserProxy.ASCOM
                         if (iNewPos != _iCurrent)
                         {
                             _iCurrent = iNewPos;
-                            PositionChanged?.Invoke(this, new EventArgs());
+                            if (PositionChanged != null)
+                                PositionChanged.Invoke(this, new EventArgs());
                         }
 
                     }
@@ -289,7 +295,8 @@ namespace Sharpcap.FocuserProxy.ASCOM
 
         private void FireMovingChangedEvent()
         {
-            MovingChanged?.Invoke(this, new EventArgs());
+            if (MovingChanged != null)
+                MovingChanged.Invoke(this, new EventArgs());
         }
     }
 }

@@ -32,7 +32,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Sharpcap.FocuserProxy.ASCOM
+namespace TestApp
 {
     public partial class FocusDualSliderControl : UserControl
     {

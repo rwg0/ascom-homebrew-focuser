@@ -1,5 +1,4 @@
-﻿using Sharpcap.FocuserProxy.ASCOM;
-namespace TestApp
+﻿namespace TestApp
 {
     partial class Form1
     {
@@ -29,7 +28,7 @@ namespace TestApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.focusControl = new Sharpcap.FocuserProxy.ASCOM.FocusDualSliderControl();
+            this.focusControl = new FocusDualSliderControl();
             this.SuspendLayout();
             // 
             // focusControl
