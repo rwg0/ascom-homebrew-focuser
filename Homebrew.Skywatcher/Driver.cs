@@ -266,7 +266,7 @@ namespace ASCOM.Homebrew.Skywatcher
 
         private void SetValue(string key, string value)
         {
-            _profile.WriteValue(s_csDriverID, key, value, "");
+            _profile.WriteValue(s_csDriverID, key, value ?? "", "");
         }
 
         private string GetValue(string key)

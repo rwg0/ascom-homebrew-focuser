@@ -30,11 +30,14 @@ namespace ASCOM.Homebrew.Skywatcher
                 }
             }
 
-            if (comboBox1.SelectedIndex == -1)
+            if (comboBox1.SelectedIndex == -1 && comboBox1.Items.Count>0)
                 comboBox1.SelectedIndex = 0;
 
             checkBox1.Checked = reversed;
             checkBox2.Checked = absolute;
+
+            if (comboBox1.Items.Count == 0)
+                cmdOK.Enabled = false;
         }
 
         internal string GetSelectedPort()
