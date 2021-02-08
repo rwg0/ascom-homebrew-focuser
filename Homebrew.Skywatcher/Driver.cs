@@ -211,7 +211,17 @@ namespace ASCOM.Homebrew.Skywatcher
             _controller.MoveRelative(val);
         }
 
-        public bool Connected { get; set; }
+        public bool Connected
+        {
+            get
+            {
+                return Link;
+            }
+            set
+            {
+                Link = value;
+            }
+        }
         public string Description { get; private set; }
         public string DriverInfo { get; private set; }
         public string DriverVersion { get; private set; }

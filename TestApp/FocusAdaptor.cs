@@ -1,6 +1,6 @@
 ﻿// This file is part of SharpCap, a C# Video Capture Application for Windows
 //
-//    Copyright (c) 2010-2012, Robin Glover
+//    Copyright (c) 2010-2016, Robin Glover
 //    All rights reserved.
 //
 //    Redistribution and use in source and binary forms, with or without

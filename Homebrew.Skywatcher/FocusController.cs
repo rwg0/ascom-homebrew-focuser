@@ -83,7 +83,7 @@ namespace ASCOM.Homebrew.Skywatcher
                     break;
 
  //               Debug.WriteLine("Moving focuser : " + ((stepSize < 0) ? "In" : "Out"));
-                m_port.Write(new byte[1], 0, 1);
+                m_port.Write(new byte[1] {0x00}, 0, 1);
             }
             Debug.WriteLine("Move Complete");
         }
