@@ -28,10 +28,9 @@ using System.Runtime.InteropServices;
 
 using ASCOM;
 using ASCOM.DeviceInterface;
-using ASCOM.Helper;
-using ASCOM.Helper2;
-using ASCOM.Interface;
+
 using System.Diagnostics;
+using ASCOM.Utilities;
 
 namespace ASCOM.Homebrew.Skywatcher
 {
@@ -44,7 +43,7 @@ namespace ASCOM.Homebrew.Skywatcher
     //
     [Guid("57010fb5-21b9-4ed2-b899-df7de571414a")]
     [ClassInterface(ClassInterfaceType.None)]
-    public class Focuser : IFocuser, IFocuserV2
+    public class Focuser :  IFocuserV2
     {
         //
         // Driver ID and descriptive string that shows in the Chooser
@@ -65,7 +64,7 @@ namespace ASCOM.Homebrew.Skywatcher
         public Focuser()
         {
             _profile = new Profile();
-            _profile.DeviceTypeV = "Focuser";
+            _profile.DeviceType = "Focuser";
             SetFlags();
         }
 
@@ -76,15 +75,15 @@ namespace ASCOM.Homebrew.Skywatcher
         //
         private static void RegUnregASCOM(bool bRegister)
         {
-            Helper.Profile P = new Helper.Profile();
-            P.DeviceTypeV = "Focuser";					//  Requires Helper 5.0.3 or later
+            Profile P = new Profile();
+            P.DeviceType = "Focuser";					//  Requires Helper 5.0.3 or later
             if (bRegister)
                 P.Register(s_csDriverID, s_csDriverDescription);
             else
                 P.Unregister(s_csDriverID);
             try										// In case Helper becomes native .NET
             {
-                Marshal.ReleaseComObject(P);
+                P.Dispose();
             }
             catch (Exception) { }
             P = null;
