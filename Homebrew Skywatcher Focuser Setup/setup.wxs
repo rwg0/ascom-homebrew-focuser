@@ -675,8 +675,8 @@
             </Dialog>
         </UI>
         <Upgrade Id="{C45042BD-2667-4249-BEF2-08B532CCEBC4}">
-            <UpgradeVersion Maximum="1.0.4" Property="PREVIOUSVERSIONSINSTALLED" />
-            <UpgradeVersion Minimum="1.0.4" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
+            <UpgradeVersion Maximum="1.0.6" Property="PREVIOUSVERSIONSINSTALLED" />
+            <UpgradeVersion Minimum="1.0.6" Property="NEWERPRODUCTFOUND" OnlyDetect="yes" IncludeMinimum="yes" />
         </Upgrade>
         <InstallExecuteSequence>
             <Custom Action="DIRCA_CheckFX" Sequence="1" />
