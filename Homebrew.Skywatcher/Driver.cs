@@ -57,6 +57,7 @@ namespace ASCOM.Homebrew.Skywatcher
         Profile _profile;
         private bool _reversed;
         private bool _absolute;
+        private int _position = 50000;
 
         //
         // Constructor - Must be public for COM registration!
@@ -111,7 +112,7 @@ namespace ASCOM.Homebrew.Skywatcher
         {
             get
             {
-                return false;
+                return _absolute;
             }
         }
 
@@ -144,10 +145,18 @@ namespace ASCOM.Homebrew.Skywatcher
             set
             {
                 if (_controller != null)
+                {
                     _controller.Dispose();
+                    SetValue("LastPos", _position.ToString());
+                }
                 if (value)
                 {
                     BuildController();
+                    var pos = GetValue("LastPos");
+                    if (!string.IsNullOrEmpty(pos))
+                    {
+                        int.TryParse(pos, out _position);
+                    }
                 }
                 else
                 {
@@ -208,6 +217,7 @@ namespace ASCOM.Homebrew.Skywatcher
             _controller.Reversed = _reversed;
 
             _controller.MoveRelative(val);
+            _position += val;
         }
 
         public bool Connected
@@ -233,7 +243,7 @@ namespace ASCOM.Homebrew.Skywatcher
             {
                 if (!Link)
                     throw new InvalidOperationException("Focuser link not activated");
-                return 0;
+                return _position;
             }
         }
 
