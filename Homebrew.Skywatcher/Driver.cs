@@ -216,8 +216,14 @@ namespace ASCOM.Homebrew.Skywatcher
 
             _controller.Reversed = _reversed;
 
+            if (_absolute)
+                val -= _position;
+
             _controller.MoveRelative(val);
             _position += val;
+
+            if (_absolute)
+                SetValue("LastPos", _position.ToString());
         }
 
         public bool Connected
@@ -243,23 +249,26 @@ namespace ASCOM.Homebrew.Skywatcher
             {
                 if (!Link)
                     throw new InvalidOperationException("Focuser link not activated");
-                return _position;
+                return _absolute ?   _position : 0;
             }
         }
 
         public void SetupDialog()
         {
-            SetupDialogForm sf = new SetupDialogForm(GetPort(), _reversed, _absolute, 100);
+            SetupDialogForm sf = new SetupDialogForm(GetPort(), _reversed, _absolute, 100) {Position = _position};
             if (sf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 SetPort(sf.GetSelectedPort());
                 SetValue("reverse", sf.IsReversed().ToString());
+                SetValue("absolute", sf.IsAbsolute().ToString());
                 if (_controller != null)
                 {
                     _controller.Dispose();
                     BuildController();
                 }
                 SetFlags();
+                if (_absolute)
+                    _position = sf.Position;
             }
         }
 

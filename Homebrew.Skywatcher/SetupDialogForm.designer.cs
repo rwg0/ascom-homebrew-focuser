@@ -35,6 +35,7 @@ namespace ASCOM.Homebrew.Skywatcher
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.picASCOM = new System.Windows.Forms.PictureBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,13 +108,23 @@ namespace ASCOM.Homebrew.Skywatcher
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
             this.checkBox2.Location = new System.Drawing.Point(12, 76);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(190, 17);
             this.checkBox2.TabIndex = 6;
             this.checkBox2.Text = "Pretend to be an Absolute Focuser";
             this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(12, 99);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 25);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Reset Position";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SetupDialogForm
             // 
@@ -122,6 +133,7 @@ namespace ASCOM.Homebrew.Skywatcher
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
             this.ClientSize = new System.Drawing.Size(222, 213);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox1);
@@ -151,5 +163,6 @@ namespace ASCOM.Homebrew.Skywatcher
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button1;
     }
 }

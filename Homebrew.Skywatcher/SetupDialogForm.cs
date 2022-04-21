@@ -50,7 +50,7 @@ namespace ASCOM.Homebrew.Skywatcher
             return checkBox1.Checked;
         }
 
-        bool IsAbsolute()
+        public bool IsAbsolute()
         {
             return checkBox2.Checked;
         }
@@ -81,5 +81,12 @@ namespace ASCOM.Homebrew.Skywatcher
                 MessageBox.Show(other.Message);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Position = 50000;
+        }
+
+        public int Position { get; set; }
     }
 }
