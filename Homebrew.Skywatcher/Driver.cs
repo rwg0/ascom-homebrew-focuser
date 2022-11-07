@@ -157,6 +157,7 @@ namespace ASCOM.Homebrew.Skywatcher
                     {
                         int.TryParse(pos, out _position);
                     }
+                 //   new CrashForm().Show();
                 }
                 else
                 {

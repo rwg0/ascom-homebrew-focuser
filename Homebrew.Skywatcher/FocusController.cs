@@ -13,6 +13,7 @@ namespace ASCOM.Homebrew.Skywatcher
         SerialPort m_port;
         Thread m_workerThread;
         ThreadControl m_control = new ThreadControl();
+        private Exception _commsError;
 
         public FocusController(string portName)
         {
@@ -49,14 +50,23 @@ namespace ASCOM.Homebrew.Skywatcher
 
         void ThreadProc()
         {
-            while (!m_control.Destroyed)
+            try
             {
-                Thread.Sleep(1);
-                int command = m_control.Command;
-                if (command != 0)
-                    ProcessCommand(command);
-                m_control.Halt = false;
+                while (!m_control.Destroyed)
+                {
+                    Thread.Sleep(1);
+                    int command = m_control.Command;
+                    if (command != 0)
+                        ProcessCommand(command);
+                    m_control.Halt = false;
+                }
             }
+            catch (Exception e)
+            {
+                _commsError = e;
+                m_control.Moving = false;
+            }
+
         }
 
         private void ProcessCommand(int command)
@@ -103,11 +113,14 @@ namespace ASCOM.Homebrew.Skywatcher
 
         internal bool IsMoving()
         {
+
             return m_control.Moving;
         }
 
         internal void Halt()
         {
+            CheckForCommsError();
+
             if (IsMoving())
             {
                 m_control.Halt = true;
@@ -123,8 +136,16 @@ namespace ASCOM.Homebrew.Skywatcher
             }
         }
 
+        private void CheckForCommsError()
+        {
+            if (_commsError != null)
+                throw new Exception("Error talking to focuser", _commsError);
+        }
+
         internal void MoveRelative(int val)
         {
+            CheckForCommsError();
+
             if (Math.Abs(val) > maxMove)
                 val = Math.Sign(val) * maxMove;
 
